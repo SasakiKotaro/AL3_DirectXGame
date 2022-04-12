@@ -24,9 +24,7 @@ void GameScene::Initialize() {
 	worldTransform_.scale_ = {5.0f, 5.0f, 5.0f};
 	// X,Y,Z軸周りの回転角を設定
 	worldTransform_.rotation_ = {
-	  XMConvertToRadians(45.0f),
-	  XMConvertToRadians(45.0f),
-	  XMConvertToRadians(45.0f)};
+	  XMConvertToRadians(45.0f), XMConvertToRadians(45.0f), XMConvertToRadians(0.0f)};
 	// X,Y,Z軸周りの平行移動を設定
 	worldTransform_.translation_ = {10.0f, 10.0f, 10.0f};
 	worldTransform_.Initialize();
@@ -51,15 +49,20 @@ void GameScene::Update() {
 		//音声停止
 		audio_->StopWave(voicehandle_);
 	}
-	value_++;
 	//値を含んだ文字列
-	std::string strDebug = std::string("Value:") + std::to_string(value_);
-
-	//デバッグテキストの表示
-	debugText_->Print(strDebug, 50, 50, 1.0f);
 	//書式指定付き表示
 	debugText_->SetPos(50, 70);
-	debugText_->Printf("year:%d", 2001);
+	debugText_->Printf(
+	  "translation:(%f,%f,%f)", worldTransform_.translation_.x, worldTransform_.translation_.y,
+	  worldTransform_.translation_.z);
+	debugText_->SetPos(50, 86);
+	debugText_->Printf(
+	  "rotation:(%f,%f,%f)", worldTransform_.rotation_.x, worldTransform_.rotation_.y,
+	  worldTransform_.rotation_.z);
+	debugText_->SetPos(50, 102);
+	debugText_->Printf(
+	  "scale:(%f,%f,%f)", worldTransform_.scale_.x, worldTransform_.scale_.y,
+	  worldTransform_.scale_.z);
 }
 
 void GameScene::Draw() {
