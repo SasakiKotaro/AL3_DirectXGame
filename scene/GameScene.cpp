@@ -20,6 +20,15 @@ void GameScene::Initialize() {
 	textureHandle_ = TextureManager::Load("mario.jpg");
 	sprite_ = Sprite::Create(textureHandle_, {100, 50});
 	model_ = Model::Create();
+	// X,Y,Z方向のスケーリングを設定
+	worldTransform_.scale_ = {5.0f, 5.0f, 5.0f};
+	// X,Y,Z軸周りの回転角を設定
+	worldTransform_.rotation_ = {
+	  XMConvertToRadians(45.0f),
+	  XMConvertToRadians(45.0f),
+	  XMConvertToRadians(45.0f)};
+	// X,Y,Z軸周りの平行移動を設定
+	worldTransform_.translation_ = {10.0f, 10.0f, 10.0f};
 	worldTransform_.Initialize();
 	viewProjection_.Initialize();
 	// soundデータの読み込み
@@ -66,7 +75,7 @@ void GameScene::Draw() {
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
 
-	sprite_->Draw();
+	// sprite_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
