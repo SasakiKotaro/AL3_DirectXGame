@@ -56,9 +56,12 @@ class GameScene {
 	Model* model_ = nullptr;
 
 	//ワールドトランスフォーム
-	WorldTransform worldTransform_;
+	WorldTransform worldTransform_[100];
 	//ビュープロジェクション
 	ViewProjection viewProjection_;
+
+	//カメラ上方向の角度
+	float viewAngle = 0.0f;
 
 	// soundデータバンドル
 	uint32_t soundDataHandle_ = 0;
@@ -69,3 +72,16 @@ class GameScene {
 	/// ゲームシーン用
 	/// </summary>
 };
+//
+//class Xmfloat3Calc {
+//  public:
+//	Xmfloat3Calc();
+//	~Xmfloat3Calc();
+//	void add(XMFLOAT3 xmf3,);
+//
+//  private:
+//};
+//
+//Xmfloat3Calc::Xmfloat3Calc() {}
+//
+//Xmfloat3Calc::~Xmfloat3Calc() {}
