@@ -51,19 +51,19 @@ void GameScene::Update() {
 	//今の座標取得
 	XMFLOAT2 position = sprite_->GetPosition();
 	//視点移動処理=====================
-	XMFLOAT3 move = {0, 0, 0};
+	XMFLOAT3 viewMove = {0, 0, 0};
 	//視点移動の速さ
 	const float kEyeSpeed = 0.2f;
 	//押した方向で移動ベクトルを変更
 	if (input_->PushKey(DIK_W)) {
-		move = {0, 0, kEyeSpeed};
+		viewMove = {0, 0, kEyeSpeed};
 	} else if (input_->PushKey(DIK_S)) {
-		move = {0, 0, -kEyeSpeed};
+		viewMove = {0, 0, -kEyeSpeed};
 	}
 	//視点移動
-	viewProjection_.eye.x += move.x;
-	viewProjection_.eye.y += move.y;
-	viewProjection_.eye.z += move.z;
+	viewProjection_.eye.x += viewMove.x;
+	viewProjection_.eye.y += viewMove.y;
+	viewProjection_.eye.z += viewMove.z;
 	//行列の再計算
 	viewProjection_.UpdateMatrix();
 	//デバッグ用
@@ -72,20 +72,21 @@ void GameScene::Update() {
 	  "eye:(%f,%f,%f)", viewProjection_.eye.x, viewProjection_.eye.y, viewProjection_.eye.z);
 
 	//注視移動処理=====================
+	XMFLOAT3 targetMove = {0, 0, 0};
 	////注視点の移動ベクトル
-	// XMFLOAT3 move = {0, 0, 0};
+	// XMFLOAT3 viewMove = {0, 0, 0};
 	//注視点の速さ
 	const float kTargetSpeed = 0.2f;
 	//押した方向で移動ベクトルを変更
 	if (input_->PushKey(DIK_LEFT)) {
-		move = {-kTargetSpeed, 0, 0};
+		targetMove = {-kTargetSpeed, 0, 0};
 	} else if (input_->PushKey(DIK_RIGHT)) {
-		move = {kTargetSpeed, 0, 0};
+		targetMove = {kTargetSpeed, 0, 0};
 	}
 	//注視点移動（ベクトルの加算）
-	viewProjection_.target.x += move.x;
-	viewProjection_.target.y += move.y;
-	viewProjection_.target.z += move.z;
+	viewProjection_.target.x += targetMove.x;
+	viewProjection_.target.y += targetMove.y;
+	viewProjection_.target.z += targetMove.z;
 	//行列の再計算
 	viewProjection_.UpdateMatrix();
 	//デバッグ用
