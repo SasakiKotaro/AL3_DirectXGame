@@ -198,7 +198,7 @@ LRESULT SubWndProc(int code, WPARAM wParam, LPARAM lParam) {
 
 } // namespace
 
-Input* Input::GetInstance() { 
+Input* Input::GetInstance() {
 	static Input instance;
 	return &instance;
 }

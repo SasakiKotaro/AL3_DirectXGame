@@ -23,33 +23,47 @@ void GameScene::Initialize() {
 	sprite_ = Sprite::Create(textureHandle_, {100, 50});
 	model_ = Model::Create();
 
-	//乱数シード生成期
-	random_device seed_gen;
-	//メルセンヌ・ツイスタ
-	mt19937_64 engine(seed_gen());
-	//乱数範囲（回転角用）
-	uniform_real_distribution<float> rotDist(0.0f, XM_2PI);
-	//乱数範囲（座標用）
-	uniform_real_distribution<float> posDist(-10.0f, 10.0f);
+	////乱数シード生成期
+	// random_device seed_gen;
+	////メルセンヌ・ツイスタ
+	// mt19937_64 engine(seed_gen());
+	////乱数範囲（回転角用）
+	// uniform_real_distribution<float> rotDist(0.0f, XM_2PI);
+	////乱数範囲（座標用）
+	// uniform_real_distribution<float> posDist(-10.0f, 10.0f);
 
 	for (int i = 0; i < _countof(worldTransform_); i++) {
+
 		// X,Y,Z方向のスケーリングを設定
-		worldTransform_[i].scale_ = {1.0f, 1.0f, 1.0f};
-		// X,Y,Z軸周りの回転角を設定
-		worldTransform_[i].rotation_ = {rotDist(engine), rotDist(engine), rotDist(engine)};
-		// X,Y,Z軸周りの平行移動を設定
-		worldTransform_[i].translation_ = {posDist(engine), posDist(engine), posDist(engine)};
+		worldTransform_[i].scale_ = {10.0f, 10.0f, 1.0f};
+		//// X,Y,Z軸周りの回転角を設定
+		// worldTransform_[i].rotation_ = {0, 0, 0};
+		//  X,Y,Z軸周りの平行移動を設定
+
+		if (i % 2 == 0) // odd
+		{
+			worldTransform_[i].translation_ = {
+			  i / 2 * worldTransform_[i].scale_.x * 2 - 100,
+			  -30,
+			  0,
+			};
+		} else {
+			worldTransform_[i].translation_ = {
+			  i / 2 * worldTransform_[i].scale_.x * 2 - 100, worldTransform_[i].scale_.x * 6 - 30,
+			  0};
+		}
+
 		worldTransform_[i].Initialize();
 	}
 	// viewProjection_.eye = {0, 0, -50};
-	////カメラ注視点座標の設定
+	//////カメラ注視点座標の設定
 	// viewProjection_.target = {10, 0, 0};
-	////カメラ上方向ベクトルの設定（右上45度設定）
+	//////カメラ上方向ベクトルの設定（右上45度設定）
 	// viewProjection_.up = {cosf(XM_PI / 4.0f), sinf(XM_PI / 4.0f), 0.0f};
-	//カメラ垂直方向視野角を設定
-	viewProjection_.fovAngleY = XMConvertToRadians(45.0f);
+	////カメラ垂直方向視野角を設定
+	viewProjection_.fovAngleY = XMConvertToRadians(75.0f);
 	//アスペクト比を設定
-	viewProjection_.aspectRatio = 1.0f;
+	//  viewProjection_.aspectRatio = 1.0f;
 	//ニアクリップ距離を設定
 	viewProjection_.nearZ = 32.0f;
 	//ファークリップ距離を設定

@@ -56,7 +56,7 @@ class GameScene {
 	Model* model_ = nullptr;
 
 	//ワールドトランスフォーム
-	WorldTransform worldTransform_[100];
+	WorldTransform worldTransform_[20];
 	//ビュープロジェクション
 	ViewProjection viewProjection_;
 
@@ -73,7 +73,7 @@ class GameScene {
 	/// </summary>
 };
 //
-//class Xmfloat3Calc {
+// class Xmfloat3Calc {
 //  public:
 //	Xmfloat3Calc();
 //	~Xmfloat3Calc();
@@ -82,6 +82,6 @@ class GameScene {
 //  private:
 //};
 //
-//Xmfloat3Calc::Xmfloat3Calc() {}
+// Xmfloat3Calc::Xmfloat3Calc() {}
 //
-//Xmfloat3Calc::~Xmfloat3Calc() {}
+// Xmfloat3Calc::~Xmfloat3Calc() {}
